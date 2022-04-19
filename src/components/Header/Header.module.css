@@ -1,0 +1,10 @@
+.header {
+  max-width: var(--wrapper-width);
+  margin: auto;
+  padding: 0 10px;
+}
+
+.title {
+  max-height: 1.4em;
+  overflow: hidden;
+}

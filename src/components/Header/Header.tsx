@@ -1,22 +1,9 @@
-import React from 'react'
-// import {
-//     Link
-//   } from "react-router-dom";
+import React, { FC } from 'react'
 
-const Popup = () => (<div className="Popup">
-        <nav>
-          <ul>
-            {/* <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>
-              <Link to="/users">Users</Link>
-            </li> */}
-          </ul>
-        </nav>
-</div>)
+import styles from './Header.module.css'
 
-export default Popup;
+const Header: FC = () => (<header className={styles.header}>
+  <h1>Videos 🌻</h1>
+</header>)
+
+export default Header;

@@ -1,21 +1,14 @@
-import React, { FC, useRef, useEffect } from 'react'
+import React, { FC } from 'react'
 
-import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import { updateUrl, setActive } from '../../pages/main/mainSlice';
+import { useAppDispatch } from '../../app/hooks';
+import { setActive } from '../../pages/main/mainSlice';
+import { ItemsType } from './types'
 
-import styles from './index.module.css'
+import styles from './Video.module.css'
 
-type VideoProps = {
-    id: number;
-    attributes: {
-        url: string;
-        slug: string;
-        title: string
-    }
-    setOpened: any
-}
+type VideoProps = ItemsType & { setOpened: React.Dispatch<React.SetStateAction<boolean>> }
 
-const Video: FC<VideoProps> = ({id, attributes: {url, slug, title}, setOpened}) => {
+const Video: FC<VideoProps> = ({id, attributes: {url, title}, setOpened}) => {
     const dispatch = useAppDispatch();
     
     const handleOpen = () => {

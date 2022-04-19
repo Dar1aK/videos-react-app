@@ -12,8 +12,13 @@
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
     "@types/react-redux": "^7.1.7",
+    "@typescript-eslint/eslint-plugin": "^5.20.0",
+    "@typescript-eslint/parser": "^5.20.0",
     "axios": "^0.26.1",
     "classnames": "^2.3.1",
+    "prettier": "^2.6.2",
+    "prettier-eslint-cli": "^5.0.1",
+    "prettier-stylelint": "^0.4.2",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-player": "^2.9.0",
@@ -26,7 +31,11 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "stylelint": "stylelint \"src/**/*.css\"",
+    "stylelint:fix": "stylelint \"src/**/*.css\" --fix",
+    "lint": "eslint src/**/*.ts{,x}",
+    "lint:fix": "eslint src/**/*.ts{,x} --fix"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -42,5 +51,14 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint": "^8.13.0",
+    "eslint-config-prettier": "^8.5.0",
+    "stylelint": "^14.7.1",
+    "stylelint-config-prettier": "^9.0.3",
+    "stylelint-config-standard": "^25.0.0",
+    "stylelint-prettier": "^2.0.0",
+    "stylelint-scss": "^4.2.0"
   }
 }

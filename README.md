@@ -1,5 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
 
+First of all, load and run project [videos-strapi-app](https://github.com/Dar1aK/videos-strapi-app)
+
 ## Available Scripts
 
 In the project directory, you can run:
