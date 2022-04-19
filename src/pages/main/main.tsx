@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import { incrementAsync, selectVideos } from './mainSlice';
+import { getVideosList, selectVideos } from './mainSlice';
 import Video from "../../components/Video"
 import Popup from '../../components/Popup';
 
@@ -13,13 +13,13 @@ const Main = () => {
     const [isOpen, setOpened] = useState(false);
 
     useEffect(() => {
-        dispatch(incrementAsync());
+        dispatch(getVideosList());
     }, []);
 
-    return (<><div className={styles.wrapper}>
+    return (<main><div className={styles.wrapper}>
         {items.map((props) => <Video key={props?.attributes?.slug} {...props} setOpened={setOpened} />)}
     </div>
-    <Popup {...{isOpen, setOpened}}/></>)
+    <Popup {...{isOpen, setOpened}}/></main>)
 }
 
 export default Main;

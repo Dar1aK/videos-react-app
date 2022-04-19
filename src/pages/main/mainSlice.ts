@@ -5,17 +5,17 @@ import { ItemsType } from '../../components/Video/types'
 
 export interface VideoState {
   items: ItemsType[];
-  active: number | null;
+  active: number;
   status: 'success' | 'loading' | 'failed';
 }
 
 const initialState: VideoState = {
   items: [],
-  active: null,
+  active: 0,
   status: 'success',
 };
 
-export const incrementAsync = createAsyncThunk(
+export const getVideosList = createAsyncThunk(
   'videos/getVideos',
   async () => {
     const response = await getVideos();
@@ -25,7 +25,7 @@ export const incrementAsync = createAsyncThunk(
 
 export const updateUrl = createAsyncThunk(
     'videos/editVideo',
-    async ({ id, url }: any) => {
+    async ({ id, url }: { id: number; url: string; }) => {
       const response = await editVideo(id, url);
       return response.data;
     }
@@ -41,10 +41,10 @@ export const videoSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(incrementAsync.pending, (state) => {
+      .addCase(getVideosList.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(incrementAsync.fulfilled, (state, action) => {
+      .addCase(getVideosList.fulfilled, (state, action) => {
         state.status = 'success';
         console.log('get', state.items, action.payload)
         state.items = action.payload;
