@@ -1,0 +1,8 @@
+.wrapper {
+    /* width: 30%; */
+}
+
+.title {
+    max-height: 1.4em;
+    overflow: hidden;
+}
