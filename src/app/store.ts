@@ -1,8 +1,10 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import videosReducer from '../pages/main/mainSlice'
+import detailReducer from '../pages/detail/detailSlice';
+import videosReducer from '../pages/main/mainSlice';
 
 export const store = configureStore({
   reducer: {
+    detail: detailReducer,
     videos: videosReducer,
   },
 });

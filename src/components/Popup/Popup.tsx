@@ -1,5 +1,4 @@
 import React, { FC, useEffect, useState } from 'react';
-import cn from 'classnames';
 
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { updateUrl, selectVideos } from '../../pages/main/mainSlice';
@@ -8,8 +7,8 @@ import styles from './Popup.module.css';
 
 type PopupTypes = {
   isOpen: boolean;
-  setOpened: React.Dispatch<React.SetStateAction<boolean>>
-}
+  setOpened: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
 const Popup: FC<PopupTypes> = ({ isOpen, setOpened }) => {
   const [url, setUrl] = useState('');
@@ -22,19 +21,33 @@ const Popup: FC<PopupTypes> = ({ isOpen, setOpened }) => {
     }
   }, [isOpen]);
 
-  const handleChange = (e) => setUrl(e.target.value);
+  const handleChange = e => setUrl(e.target.value);
 
-  const handleEdit = () => dispatch(updateUrl({ id: active, url })).then(() => setOpened(false));
+  const handleEdit = () =>
+    dispatch(updateUrl({ id: active, url })).then(() => setOpened(false));
 
   return (
-    <div className={cn(styles.blackout, { [styles.open]: isOpen })}>
+    <div className={`${styles.blackout} ${isOpen && styles.open}`}>
       <div className={styles.content}>
-        <button type="button" onClick={() => setOpened(false)} className={styles.close}>X</button>
-        <input type="text" placeholder="Url" autoFocus value={url} onChange={handleChange} />
-        <button type="submit" disabled={!url} onClick={handleEdit}>Update</button>
+        <button
+          type="button"
+          onClick={() => setOpened(false)}
+          className={styles.close}
+        >
+          X
+        </button>
+        <input
+          type="text"
+          placeholder="Url"
+          value={url}
+          onChange={handleChange}
+        />
+        <button type="submit" disabled={!url} onClick={handleEdit}>
+          Update
+        </button>
       </div>
     </div>
   );
-}
+};
 
 export default Popup;

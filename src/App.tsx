@@ -1,13 +1,22 @@
 import React from 'react';
-import Header from './components/Header'
-import Main from './pages/main/main';
+
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+import Header from './components/Header';
+import Detail from './pages/detail';
+import Main from './pages/main';
 
 function App() {
   return (
     <div className="App">
       <Header />
-      
-      <Main />
+
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/:id" element={<Detail />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
