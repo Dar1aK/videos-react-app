@@ -1,3 +1,34 @@
+## For reviewers ☀️
+
+1. For run this project please first of all load and run project with backend [videos-strapi-app](https://github.com/Dar1aK/videos-strapi-app)
+2. Run `videos-strapi-app` with `yarn` -> `yarn develop`
+3. Run `videos-react-app` with `yarn` -> `yarn start`
+
+I realised next bonus points of Test:
+
+- Page with form for add entry
+- A little bit of beautifulization with `Material UI`
+- Responsive design
+
+Except that I did:
+
+- `Typescript` is used
+- `Redux Toolkit` is used for state management
+- `eslint`, `stylelint`, `prettier` and some rules for them is added
+- Output error in form of create entry is added
+- 'Thank you' step when create request is done
+- Default text when entries not loaded in `Strapi` is added
+
+Next steps for extension development:
+
+- Add tests (I didn't have time for that, unfortunately 😞)
+- Add form validation, for example use `Formik` or `React Hook Form` or analog
+- Add delete of entry with UI
+- Add edit of all fields of entry
+- Do more detailed and production-like markup
+- Add autorisation with `Strapi`
+- Add pagination with `Strapi`
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
 
 First of all, load and run project [videos-strapi-app](https://github.com/Dar1aK/videos-strapi-app)
