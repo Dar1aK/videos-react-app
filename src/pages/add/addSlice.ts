@@ -38,6 +38,9 @@ export const videoSlice = createSlice({
       state.status = ''
       state.error = []
     },
+    clearError: (state) => {
+      state.error = []
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -55,7 +58,7 @@ export const videoSlice = createSlice({
   },
 })
 
-export const { setInit } = videoSlice.actions
+export const { setInit, clearError } = videoSlice.actions
 
 export const selectAdd = (state: RootState) => state.add
 

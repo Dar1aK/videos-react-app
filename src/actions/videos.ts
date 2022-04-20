@@ -9,6 +9,12 @@ export const getVideos = () =>
     .then(({ data }) => data)
     .catch(console.log)
 
+export const getDetail = (id: string) =>
+  axios
+    .get(`${VIDEOS}/${id}`)
+    .then(({ data }) => data)
+    .catch(console.log)
+
 /** Edit video url */
 export const editVideo = (id: number, newUrl: string) =>
   axios

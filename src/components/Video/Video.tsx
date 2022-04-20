@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 
+import { Link } from 'react-router-dom'
 import Button from '@mui/material/Button'
 
 import { useAppDispatch } from '../../app/hooks'
@@ -21,9 +22,14 @@ const Video: FC<VideoProps> = ({ id, attributes: { url, title }, setOpened }) =>
   return (
     <div className={styles.wrapper}>
       <h2 className={styles.title}>{title}</h2>
-      <video width='100%' controls src={url} />
+      <video width='100%' src={url} />
       <Button variant='text' type='button' onClick={handleOpen}>
         Edit
+      </Button>{' '}
+      <Button variant='contained' size='small' tabIndex={-1}>
+        <Link to={`/${id}`} className='textWhite'>
+          Watch video
+        </Link>
       </Button>
     </div>
   )
