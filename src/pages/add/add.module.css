@@ -1,0 +1,30 @@
+.block {
+  display: flex;
+  align-items: center;
+}
+
+.block__img {
+  width: 50%;
+  min-height: 400px;
+  margin-bottom: 20px;
+  background: url('/src/gray-man.svg') no-repeat center/contain;
+}
+
+.error {
+  color: red;
+}
+
+.error__path {
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .block {
+    flex-direction: column-reverse;
+  }
+
+  .block__img {
+    width: 100%;
+    min-height: 200px;
+  }
+}

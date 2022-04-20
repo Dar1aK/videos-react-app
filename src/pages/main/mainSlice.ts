@@ -1,35 +1,41 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { RootState } from '../../app/store';
-import { getVideos, editVideo } from '../../actions/getVideos';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+
+import { RootState } from '../../app/store'
+import { getVideos, editVideo } from '../../actions/videos'
 import { ItemsType } from '../../components/Video/types'
 
 export interface VideoState {
-  items: ItemsType[];
-  active: number | null;
-  status: 'success' | 'loading' | 'failed';
+  items: ItemsType[]
+  active: number
+  status: 'success' | 'loading' | 'failed'
 }
 
 const initialState: VideoState = {
   items: [],
-  active: null,
+  active: 0,
   status: 'success',
-};
+}
 
-export const incrementAsync = createAsyncThunk(
-  'videos/getVideos',
-  async () => {
-    const response = await getVideos();
-    return response.data;
+export const getVideosList = createAsyncThunk('videos/getVideos', async (_, { rejectWithValue }) => {
+  try {
+    const response = await getVideos()
+    return response?.data
+  } catch (error) {
+    return rejectWithValue(error)
   }
-);
+})
 
 export const updateUrl = createAsyncThunk(
-    'videos/editVideo',
-    async ({ id, url }: any) => {
-      const response = await editVideo(id, url);
-      return response.data;
+  'videos/editVideo',
+  async ({ id, url }: { id: number; url: string }, { rejectWithValue }) => {
+    try {
+      const response = await editVideo(id, url)
+      return response?.data
+    } catch (error) {
+      return rejectWithValue(error)
     }
-  );
+  },
+)
 
 export const videoSlice = createSlice({
   name: 'videos',
@@ -41,27 +47,33 @@ export const videoSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(incrementAsync.pending, (state) => {
-        state.status = 'loading';
+      .addCase(getVideosList.pending, (state) => {
+        state.status = 'loading'
       })
-      .addCase(incrementAsync.fulfilled, (state, action) => {
-        state.status = 'success';
-        console.log('get', state.items, action.payload)
-        state.items = action.payload;
+      .addCase(getVideosList.fulfilled, (state, action) => {
+        state.status = 'success'
+        state.items = action.payload
       })
       .addCase(updateUrl.pending, (state) => {
-        state.status = 'loading';
+        state.status = 'loading'
       })
       .addCase(updateUrl.fulfilled, (state, action) => {
-        state.status = 'success';
-        const index = state.items.findIndex(({id}) => id === action.payload.id)
-        state.items[index] = {...state.items[index], attributes: { ...state.items[index].attributes, slug: action.payload.attributes.slug, url: action.payload.attributes.url }}
-      });
+        state.status = 'success'
+        const index = state.items.findIndex(({ id }) => id === action.payload.id)
+        state.items[index] = {
+          ...state.items[index],
+          attributes: {
+            ...state.items[index].attributes,
+            slug: action.payload.attributes.slug,
+            url: action.payload.attributes.url,
+          },
+        }
+      })
   },
-});
+})
 
-export const { setActive } = videoSlice.actions;
+export const { setActive } = videoSlice.actions
 
-export const selectVideos = (state: RootState) => state.videos;
+export const selectVideos = (state: RootState) => state.videos
 
-export default videoSlice.reducer;
+export default videoSlice.reducer

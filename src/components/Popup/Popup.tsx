@@ -1,40 +1,62 @@
-import React, { FC, useEffect, useState } from 'react';
-import cn from 'classnames';
+import React, { FC, useEffect, useState } from 'react'
 
-import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import { updateUrl, selectVideos } from '../../pages/main/mainSlice';
+import CloseIcon from '@mui/icons-material/Close'
+import Backdrop from '@mui/material/Backdrop'
+import Button from '@mui/material/Button'
+import Fade from '@mui/material/Fade'
+import Modal from '@mui/material/Modal'
+import TextField from '@mui/material/TextField'
 
-import styles from './Popup.module.css';
+import { useAppSelector, useAppDispatch } from '../../app/hooks'
+import { updateUrl, selectVideos } from '../../pages/main/mainSlice'
+
+import styles from './Popup.module.css'
 
 type PopupTypes = {
-  isOpen: boolean;
+  isOpen: boolean
   setOpened: React.Dispatch<React.SetStateAction<boolean>>
 }
 
+/** Popup for edit video url */
+
 const Popup: FC<PopupTypes> = ({ isOpen, setOpened }) => {
-  const [url, setUrl] = useState('');
-  const dispatch = useAppDispatch();
-  const { active } = useAppSelector(selectVideos);
+  const [url, setUrl] = useState('')
+  const dispatch = useAppDispatch()
+  const { active } = useAppSelector(selectVideos)
 
   useEffect(() => {
     if (!isOpen) {
-      setUrl('');
+      setUrl('')
     }
-  }, [isOpen]);
+  }, [isOpen])
 
-  const handleChange = (e) => setUrl(e.target.value);
+  const handleChange = (e) => setUrl(e.target.value)
 
-  const handleEdit = () => dispatch(updateUrl({ id: active, url })).then(() => setOpened(false));
+  const handleEdit = () => dispatch(updateUrl({ id: active, url })).then(() => setOpened(false))
 
   return (
-    <div className={cn(styles.blackout, { [styles.open]: isOpen })}>
-      <div className={styles.content}>
-        <button type="button" onClick={() => setOpened(false)} className={styles.close}>X</button>
-        <input type="text" placeholder="Url" autoFocus value={url} onChange={handleChange} />
-        <button type="submit" disabled={!url} onClick={handleEdit}>Update</button>
-      </div>
-    </div>
-  );
+    <Modal
+      open={isOpen}
+      onClose={() => setOpened(false)}
+      aria-labelledby='modal-modal-title'
+      aria-describedby='modal-modal-description'
+      closeAfterTransition
+      BackdropComponent={Backdrop}
+      BackdropProps={{
+        timeout: 500,
+      }}
+    >
+      <Fade in={isOpen}>
+        <div className={styles.content}>
+          <TextField label='Url' variant='filled' autoFocus value={url} onChange={handleChange} />
+          <Button variant='contained' type='submit' size='large' disabled={!url} onClick={handleEdit}>
+            Update
+          </Button>
+          <CloseIcon type='button' onClick={() => setOpened(false)} className={styles.close} />
+        </div>
+      </Fade>
+    </Modal>
+  )
 }
 
-export default Popup;
+export default Popup

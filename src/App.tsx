@@ -4,21 +4,22 @@ import {
   Routes,
   Route,
 } from 'react-router-dom';
+
 import Header from './components/Header'
-import Main from './pages/main/main';
+import Add from './pages/add';
+import Main from './pages/main';
 
 function App() {
   return (
     <div className="App">
-      <Header />
       
-      <main>
         <BrowserRouter>
+          <Header />
           <Routes>
+            <Route path="/add" element={<Add />} />
             <Route path="/" element={<Main />} />
           </Routes>
         </BrowserRouter>
-      </main>
     </div>
   );
 }

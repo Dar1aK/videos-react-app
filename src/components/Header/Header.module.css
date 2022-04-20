@@ -1,5 +1,7 @@
 .header {
   max-width: var(--wrapper-width);
+  display: flex;
+  align-items: center;
   margin: auto;
   padding: 0 10px;
 }
@@ -7,4 +9,22 @@
 .title {
   max-height: 1.4em;
   overflow: hidden;
+}
+
+.navigation {
+  display: flex;
+}
+
+.navigation li {
+  list-style: none;
+  padding: 5px;
+}
+
+.navigation a {
+  color: #000;
+  text-decoration: underline;
+}
+
+.navigation a:hover {
+  text-decoration: none;
 }
